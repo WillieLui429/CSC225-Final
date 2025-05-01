@@ -12,26 +12,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </head>
+    
     <script>
-       async function myFunction()
-       {
-            const url = "https://www.asterank.com/api/asterank?query={%22e%22:{%22$lt%22:0.1},%22i%22:{%22$lt%22:4},%22a%22:{%22$lt%22:1.5}}&limit=10";
-            fetch(url)
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));
-
-       }
-
-
-
-
-    </script>
-    <script>
-        async function mySearch()
+        async function mySearchname()
         {
             var input, filter, ul, li, a, i, txtValue;
-            input =document.getElementById("myInput");
+            input =document.getElementById("myInputname");
             const url = "https://www.asterank.com/api/asterank?query={%22e%22:{%22$lt%22:0.1},%22i%22:{%22$lt%22:4},%22a%22:{%22$lt%22:1.5}}&limit=10";
             fetch(url)
             .then(response => response.json())
@@ -58,17 +44,53 @@
         </nav>
 
         <div class = "container-fluid">
-            <input type = "text" id ="myInput" onkeyup ="mySearch()" placeholder="Search up Asteriods">
-            <table class = "table table-bordered">
+            <div class = "row">
+                <div class = "col-4">
+                    <input type = "text" id ="myInputname" onkeyup ="mySearchname()" placeholder="Search by Name">
+                </div>
+                <div class = "col-4">
+                    <input type = "text" id ="myInputsize" onkeyup ="mySearch()" placeholder="Search by Size(km)">
+                </div>
+                <div class = "col-4">
+                    <input type = "text" id ="myInputdistant" onkeyup ="mySearch()" placeholder="Search by distance(AU)">
+                </div>
+            </div>
+            
+            <table class = "table table-bordered" id = "dataTable">
                 <tr>
                     <td>Name</td>
                     <td>Aphelion (AU)</td>
                     <td>Vaule</td>
                     <td>Profit</td>
-                    <td>First Observed</td>
+                    <td>Last Observed</td>
+                    <td>Size (km)</td>
+                    <td>Class</td>
                 </tr>
             </table>
+
+                <script>
+                const url = "https://www.asterank.com/api/asterank?query={%22e%22:{%22$lt%22:0.1},%22i%22:{%22$lt%22:4},%22a%22:{%22$lt%22:1.5}}&limit=10";
+                fetch(url)
+                .then(res => {
+                    if(res.ok)
+                    {
+                        console.log("SUCCESS")
+                    }
+                    else
+                    {
+                        console.log("Not Successful")
+                    }
+                    return res.json()
+                })
+                .then(data => {
+                    data.forEach(myObj =>{
+                        const markup = "<tr><td>"+ myObj.full_name +"</td><td>" + myObj.a+"</td><td>"+myObj.price+"</td><td>"+myObj.profit+"</td><td>"+ myObj.last_obs+"</td><td>" + myObj.est_diameter + "</td><td>" + myObj.class +"</td><tr>";
+                        document.querySelector("table").insertAdjacentHTML('beforeend', markup);
+                    })
+                })
+                .catch(error => console.log(error))
+
+                </script>
         </div>
-        <button onclick = "myFunction()">click me</button>
     </body>
 </html>
