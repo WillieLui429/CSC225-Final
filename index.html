@@ -20,12 +20,13 @@
             input =document.getElementById("myInputname");
             output = document.getElementById("dataTable");
             filter = input.value.toUpperCase();
-            const url = "https://www.asterank.com/api/asterank?query={}&limit=600000";
+            const url = "https://www.asterank.com/api/asterank?query={}&limit=100";
             fetch(url)
             .then(response => response.json())
-            .then(data => {data.forEach(myObj =>{
-                txtValue =myObj.full_name.textContent || myObj.full_name.innerText;
-                if(txtValue.toUpperCase().indexOf(filter)>-1)
+            .then(data => 
+                {data.forEach(myObj =>{
+                
+                if(myObj.full_name.toUpperCase().indexOf(filter)>-1)
                 {
                     const markup = "<tr><td>"+ myObj.full_name +"</td><td>" + myObj.a+"</td><td>"+myObj.price+"</td><td>"+myObj.profit+"</td><td>"+ myObj.last_obs+"</td><td>" + myObj.est_diameter + "</td><td>" + myObj.class +"</td><tr>";
                         document.querySelector("table").insertAdjacentHTML('beforeend', markup);
