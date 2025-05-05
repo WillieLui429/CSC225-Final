@@ -20,7 +20,7 @@
             input =document.getElementById("myInputname");
             output = document.getElementById("dataTable");
             filter = input.value.toUpperCase();
-            const url = "https://www.asterank.com/api/asterank?query={}&limit=100";
+            const url = "https://www.asterank.com/api/asterank?query={}&limit=60000";
             fetch(url)
             .then(response => response.json())
             .then(data => 
@@ -56,20 +56,21 @@
                     <a class ="nav-link" href = "index.html">Home</a>
                 </li>
                 <li class = "nav-item active">
-                    <a class = "nav-link" href="Orbits.html">Orbit</a>
+                    <a class = "nav-link" href="Page2.html">Orbit</a>
                 </li>
             </ul>
         </nav>
 
         <div class = "container-fluid">
             
-                <input type = "text" id ="myInputname" onkeyup = "mySearchname()" placeholder="Search by Name">
+                <input type = "text" id ="myInputname"  placeholder="Search by Name">
+                <button onclick = "mySearchname()">Search</button>
 
             
             <table class = "table table-bordered" id = "dataTable">
                 <tr>
                     <th>Name</th>
-                    <th>Semi-Major Axis (AU)</th>
+                    <th>Perihelion Distance (AU)</th>
                     <th>Vaule</th>
                     <th>Profit</th>
                     <th>Last Observed</th>
@@ -94,7 +95,7 @@
                 })
                 .then(data => {
                     data.forEach(myObj =>{
-                        const markup = "<tr><td>"+ myObj.full_name +"</td><td>" + myObj.a+"</td><td>"+myObj.price+"</td><td>"+myObj.profit+"</td><td>"+ myObj.last_obs+"</td><td>" + myObj.est_diameter + "</td><td>" + myObj.class +"</td><tr>";
+                        const markup = "<tr><td>"+ myObj.full_name +"</td><td>" + myObj.q+"</td><td>"+myObj.price+"</td><td>"+myObj.profit+"</td><td>"+ myObj.last_obs+"</td><td>" + myObj.est_diameter + "</td><td>" + myObj.class +"</td><tr>";
                         document.querySelector("table").insertAdjacentHTML('beforeend', markup);
                     })
                 })

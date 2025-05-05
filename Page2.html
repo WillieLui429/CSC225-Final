@@ -1,16 +1,121 @@
 <html>
     <head>
-        <title>Asteriods</title>
+        <title>Orbits</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-          
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">          
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         </head>
+        <script>
+            async function Profitable()
+            {
+                const url = "https://www.asterank.com/api/asterank?query=%7B%22profit%22:%20%7B%22$gt%22:%2010000000000000%7D%7D&limit=10";
+                fetch(url)
+                .then(res => {
+                    if(res.ok)
+                    {
+                        console.log("SUCCESS")
+                    }
+                    else
+                    {
+                        console.log("Not Successful")
+                    }
+                    return res.json()
+                })
+                .then(data => {
+                    data.forEach(myObj =>{
+                        const markup = "<tr><td>"+ myObj.full_name +"</td><td>" + myObj.a+"</td><td>"+myObj.price+"</td><td>"+myObj.profit+"</td><td>"+ myObj.last_obs+"</td><td>" + myObj.est_diameter + "</td><td>" + myObj.class +"</td><tr>";
+                        document.querySelector("table").insertAdjacentHTML('beforeend', markup);
+
+                    })
+                })
+                .catch(error => console.log(error))
+
+            }
+        </script>
+        <script>
+            async function Smallest()
+            {
+                const url = "https://www.asterank.com/api/asterank?query={%22est_diameter%22:%20{%22$lt%22:%200.1}}&limit=10";
+                fetch(url)
+                .then(res => {
+                    if(res.ok)
+                    {
+                        console.log("SUCCESS")
+                    }
+                    else
+                    {
+                        console.log("Not Successful")
+                    }
+                    return res.json()
+                })
+                .then(data => {
+                    data.forEach(myObj =>{
+                        const markup = "<tr><td>"+ myObj.full_name +"</td><td>" + myObj.a+"</td><td>"+myObj.price+"</td><td>"+myObj.profit+"</td><td>"+ myObj.last_obs+"</td><td>" + myObj.est_diameter + "</td><td>" + myObj.class +"</td><tr>";
+                        document.querySelector("table").insertAdjacentHTML('beforeend', markup);
+
+                    })
+                })
+                .catch(error => console.log(error))
+
+            }
+        </script>
+        <script>
+            async function Biggest()
+            {
+                const url = "https://www.asterank.com/api/asterank?query={%22est_diameter%22:%20{%22$gt%22:%20900}}&limit=10";
+                fetch(url)
+                .then(res => {
+                    if(res.ok)
+                    {
+                        console.log("SUCCESS")
+                    }
+                    else
+                    {
+                        console.log("Not Successful")
+                    }
+                    return res.json()
+                })
+                .then(data => {
+                    data.forEach(myObj =>{
+                        const markup = "<tr><td>"+ myObj.full_name +"</td><td>" + myObj.a+"</td><td>"+myObj.price+"</td><td>"+myObj.profit+"</td><td>"+ myObj.last_obs+"</td><td>" + myObj.est_diameter + "</td><td>" + myObj.class +"</td><tr>";
+                        document.querySelector("table").insertAdjacentHTML('beforeend', markup);
+
+                    })
+                })
+                .catch(error => console.log(error))
+            }
+        </script>
+                <script>
+                    async function Closest()
+                    {
+                        const url = "https://www.asterank.com/api/asterank?query={%22a%22:%20{%22$lt%22:%201.1}}&limit=10";
+                        fetch(url)
+                        .then(res => {
+                            if(res.ok)
+                            {
+                                console.log("SUCCESS")
+                            }
+                            else
+                            {
+                                console.log("Not Successful")
+                            }
+                            return res.json()
+                        })
+                        .then(data => {
+                            data.forEach(myObj =>{
+                                const markup = "<tr><td>"+ myObj.full_name +"</td><td>" + myObj.a+"</td><td>"+myObj.price+"</td><td>"+myObj.profit+"</td><td>"+ myObj.last_obs+"</td><td>" + myObj.est_diameter + "</td><td>" + myObj.class +"</td><tr>";
+                                document.querySelector("table").insertAdjacentHTML('beforeend', markup);
+        
+                            })
+                        })
+                        .catch(error => console.log(error))
+                    }
+                </script>
         <style>
             body{
                 background-image: url("data:image/jpeg;base64,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");
@@ -23,9 +128,50 @@
                         <a class ="nav-link" href = "index.html">Home</a>
                     </li>
                     <li class = "nav-item active">
-                        <a class = "nav-link" href="Orbits.html">Orbit</a>
+                        <a class = "nav-link" href="Page2.html">Orbit</a>
                     </li>
                 </ul>
             </nav>
+            <button onclick = "Smallest()">Smallest</button>
+            <button onclick = "Biggest()">Biggest</button>
+            <button onclick = "Profitable()">Most Profitable</button>
+            <button onclick = "Closest()">Closest</button>
+            <table class = "table table-bordered" id = "dataTable">
+                <tr>
+                    <th>Name</th>
+                    <th>Perihelion Distance (AU)</th>
+                    <th>Vaule</th>
+                    <th>Profit</th>
+                    <th>Last Observed</th>
+                    <th>Size (km)</th>
+                    <th>Class</th>
+                </tr>
+            </table>
+           
+
+                <script>
+                const url = "https://www.asterank.com/api/asterank?query={%22est_diameter%22:%20{%22$lt%22:%200.1}}&limit=10";
+                fetch(url)
+                .then(res => {
+                    if(res.ok)
+                    {
+                        console.log("SUCCESS")
+                    }
+                    else
+                    {
+                        console.log("Not Successful")
+                    }
+                    return res.json()
+                })
+                .then(data => {
+                    data.forEach(myObj =>{
+                        const markup = "<tr><td>"+ myObj.full_name +"</td><td>" + myObj.a+"</td><td>"+myObj.price+"</td><td>"+myObj.profit+"</td><td>"+ myObj.last_obs+"</td><td>" + myObj.est_diameter + "</td><td>" + myObj.class +"</td><tr>";
+                        document.querySelector("table").insertAdjacentHTML('beforeend', markup);
+
+                    })
+                })
+                .catch(error => console.log(error))
+
+                </script>
         </body>
 </html>
